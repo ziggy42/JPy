@@ -767,7 +767,8 @@ public class VirtualMachine {
 
     /**
      * POP_BLOCK
-     * Removes one block from the block stack. Per frame, there is a stack of blocks, denoting nested loops, try statements, and such.
+     * Removes one block from the block stack. Per frame, there is a stack of blocks, denoting nested loops, try
+     * statements, and such.
      */
     private Block popBlock() {
         return currentFrame.blockStack.pop();
@@ -1008,7 +1009,8 @@ public class VirtualMachine {
 
     /**
      * JUMP_IF_TRUE_OR_POP(target)
-     * If TOS is true, sets the bytecode counter to target and leaves TOS on the stack. Otherwise (TOS is false), TOS is popped.
+     * If TOS is true, sets the bytecode counter to target and leaves TOS on the stack. Otherwise (TOS is false),
+     * TOS is popped.
      */
     private void jumpIfTrueOrPop(int target) {
         Object tos = peek();
@@ -1024,7 +1026,8 @@ public class VirtualMachine {
 
     /**
      * JUMP_IF_FALSE_OR_POP(target)
-     * If TOS is false, sets the bytecode counter to target and leaves TOS on the stack. Otherwise (TOS is true), TOS is popped.
+     * If TOS is false, sets the bytecode counter to target and leaves TOS on the stack. Otherwise (TOS is true),
+     * TOS is popped.
      */
     private void jumpIfFalseOrPop(int target) {
         Object tos = peek();
