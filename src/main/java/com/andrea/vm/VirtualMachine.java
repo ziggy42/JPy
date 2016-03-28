@@ -39,14 +39,10 @@ public class VirtualMachine {
     }
 
     public Object runCode(PyCodeObject pyCodeObject) throws Exception {
-        return runFrame(createFrame(pyCodeObject));
+        return runFrame(createFrame(pyCodeObject, new Object[0]));
     }
 
-    public Frame createFrame(PyCodeObject pyCodeObject) {
-        return new Frame(pyCodeObject, currentFrame);
-    }
-
-    public Frame createFrame(PyCodeObject pyCodeObject, Object[] args) {
+    Frame createFrame(PyCodeObject pyCodeObject, Object[] args) {
         Map<String, Object> locals = new HashMap<>(args.length);
         for (int i = 0; i < args.length; i++)
             locals.put(pyCodeObject.getVarName(i), args[i]);
@@ -63,7 +59,7 @@ public class VirtualMachine {
         currentFrame = callStack.isEmpty() ? null : callStack.peek();
     }
 
-    public Object runFrame(Frame frame) throws Exception {
+    Object runFrame(Frame frame) throws Exception {
         pushFrame(frame);
 
         Integer[] code = frame.pyCodeObject.getCo_code();
