@@ -396,6 +396,7 @@ public class VirtualMachine {
      * NOP
      * Do nothing code. Used as a placeholder by the bytecode optimizer.
      */
+    @SuppressWarnings("EmptyMethod")
     private void nop() {
     }
 
