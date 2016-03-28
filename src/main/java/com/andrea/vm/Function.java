@@ -2,9 +2,7 @@ package com.andrea.vm;
 
 import com.andrea.pyobjects.PyCodeObject;
 
-/**
- * The important thing to notice is that calling a function --- invoking the __call__ method --- creates a new Frame object and starts running it.
- */
+
 public class Function {
     private VirtualMachine virtualMachine;
     private String name;

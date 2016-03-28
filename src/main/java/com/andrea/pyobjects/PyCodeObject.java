@@ -24,8 +24,9 @@ public class PyCodeObject {
     //private int co_firstlineno;
     //private String co_lnotab;
 
-    public PyCodeObject(int co_argcount, int co_nlocals, int co_stacksize, int co_flags, int co_kwonlyargcount, String co_name, String co_filename,
-                        Integer[] co_code, Object[] co_consts, String[] co_names, String[] co_varnames, String[] co_freevars, String[] co_cellvars) {
+    public PyCodeObject(int co_argcount, int co_nlocals, int co_stacksize, int co_flags, int co_kwonlyargcount,
+                        String co_name, String co_filename, Integer[] co_code, Object[] co_consts, String[] co_names,
+                        String[] co_varnames, String[] co_freevars, String[] co_cellvars) {
         this.co_argcount = co_argcount;
         this.co_nlocals = co_nlocals;
         this.co_stacksize = co_stacksize;

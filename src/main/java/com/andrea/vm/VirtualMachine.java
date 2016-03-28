@@ -195,7 +195,8 @@ public class VirtualMachine {
                 case 89: // POP_EXCEPT
                     break;
                 case 90: // STORE_NAME
-                    storeName(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    storeName(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 91: // DELETE_NAME
                     break;
@@ -214,10 +215,12 @@ public class VirtualMachine {
                 case 98: // DELETE_GLOBAL
                     break;
                 case 100: // LOAD_CONST
-                    loadConst(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    loadConst(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 101: // LOAD_NAME
-                    loadName(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    loadName(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 102: // BUILD_TUPLE
                     break;
@@ -230,56 +233,68 @@ public class VirtualMachine {
                 case 106: // LOAD_ATTR
                     break;
                 case 107: // COMPARE_OP
-                    compareOp(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    compareOp(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 108: // IMPORT_NAME
                     break;
                 case 109: // IMPORT_FROM
                     break;
                 case 110: // JUMP_FORWARD
-                    jumpForward(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    jumpForward(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 111: // JUMP_IF_FALSE_OR_POP
-                    jumpIfFalseOrPop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    jumpIfFalseOrPop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 112: // JUMP_IF_TRUE_OR_POP
-                    jumpIfTrueOrPop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    jumpIfTrueOrPop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 113: // JUMP_ABSOLUTE
-                    jumpAbsolute(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    jumpAbsolute(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 114: // POP_JUMP_IF_FALSE
-                    popJumpIfFalse(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    popJumpIfFalse(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 115: // POP_JUMP_IF_TRUE
-                    popJumpIfTrue(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    popJumpIfTrue(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 116: // LOAD_GLOBAL
                     break;
                 case 119: // CONTINUE_LOOP
                     break;
                 case 120: // SETUP_LOOP
-                    setupLoop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    setupLoop(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 121: // SETUP_EXCEPT
                     break;
                 case 122: // SETUP_FINALLY
                     break;
                 case 124: // LOAD_FAST
-                    loadFast(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    loadFast(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 125: // STORE_FAST
-                    storeFast(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    storeFast(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 126: // DELETE_FAST
                     break;
                 case 130: // RAISE_VARARGS
                     break;
                 case 131: // CALL_FUNCTION
-                    callFunction(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    callFunction(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 132: // MAKE_FUNCTION
-                    makeFunction(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(), code[currentFrame.bytecodeCounter++].byteValue()));
+                    makeFunction(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 133: // BUILD_SLICE
                     break;
@@ -666,8 +681,9 @@ public class VirtualMachine {
     }
 
     // In-place operations
-    // In-place operations are like binary operations, in that they remove TOS and TOS1, and push the result back on the stack,
-    // but the operation is done in-place when TOS1 supports it, and the resulting TOS may be (but does not have to be) the original TOS1.
+    // In-place operations are like binary operations, in that they remove TOS and TOS1, and push the result back on
+    // the stack, but the operation is done in-place when TOS1 supports it, and the resulting TOS may be
+    // (but does not have to be) the original TOS1.
     // TODO In-place operations
 
     /**
@@ -703,7 +719,8 @@ public class VirtualMachine {
 
     /**
      * CONTINUE_LOOP(target)
-     * Continues a loop due to a continue statement. target is the address to jump to (which should be a FOR_ITER instruction).
+     * Continues a loop due to a continue statement. target is the address to jump to (which should be a FOR_ITER
+     * instruction).
      */
 
     /**
@@ -721,8 +738,8 @@ public class VirtualMachine {
      * Calls dict.setitem(TOS1[-i], TOS, TOS1). Used to implement dict comprehensions.
      */
 
-    // For all of the SET_ADD, LIST_APPEND and MAP_ADD instructions, while the added value or key/value pair is popped off,
-    // the container object remains on the stack so that it is available for further iterations of the loop.
+    // For all of the SET_ADD, LIST_APPEND and MAP_ADD instructions, while the added value or key/value pair is popped
+    // off, the container object remains on the stack so that it is available for further iterations of the loop.
 
     /**
      * RETURN_VALUE
@@ -758,14 +775,15 @@ public class VirtualMachine {
 
     /**
      * POP_EXCEPT
-     * Removes one block from the block stack. The popped block must be an exception handler block, as implicitly created when entering an except handler.
-     * In addition to popping extraneous values from the frame stack, the last three popped values are used to restore the exception state.
+     * Removes one block from the block stack. The popped block must be an exception handler block, as implicitly
+     * created when entering an except handler. In addition to popping extraneous values from the frame stack, the last
+     * three popped values are used to restore the exception state.
      */
 
     /**
      * END_FINALLY
-     * Terminates a finally clause. The interpreter recalls whether the exception has to be re-raised, or whether the function returns,
-     * and continues with the outer-next block.
+     * Terminates a finally clause. The interpreter recalls whether the exception has to be re-raised, or whether the
+     * function returns, and continues with the outer-next block.
      */
 
     /**
@@ -775,10 +793,11 @@ public class VirtualMachine {
 
     /**
      * SETUP_WITH(delta)
-     * This opcode performs several operations before a with block starts. First, it loads __exit__() from the context manager
-     * and pushes it onto the stack for later use by WITH_CLEANUP.
-     * Then, __enter__() is called, and a finally block pointing to delta is pushed. Finally, the result of calling the enter method is pushed onto the stack.
-     * The next opcode will either ignore it (POP_TOP), or store it in (a) variable(s) (STORE_FAST, STORE_NAME, or UNPACK_SEQUENCE).
+     * This opcode performs several operations before a with block starts. First, it loads __exit__() from the context
+     * manager and pushes it onto the stack for later use by WITH_CLEANUP.
+     * Then, __enter__() is called, and a finally block pointing to delta is pushed. Finally, the result of calling the
+     * enter method is pushed onto the stack. The next opcode will either ignore it (POP_TOP), or store it in (a)
+     * variable(s) (STORE_FAST, STORE_NAME, or UNPACK_SEQUENCE).
      */
 
     /**
@@ -789,14 +808,16 @@ public class VirtualMachine {
      *      (SECOND, THIRD) = (WHY_{RETURN,CONTINUE}), retval
      *      SECOND = WHY_*; no retval below it
      *      (SECOND, THIRD, FOURTH) = exc_info()
-     * In the last case, TOS(SECOND, THIRD, FOURTH) is called, otherwise TOS(None, None, None). Pushes SECOND and result of the call to the stack.
+     * In the last case, TOS(SECOND, THIRD, FOURTH) is called, otherwise TOS(None, None, None). Pushes SECOND and result
+     * of the call to the stack.
      */
 
     /**
      * WITH_CLEANUP_FINISH
      * Pops exception type and result of ‘exit’ function call from the stack.
-     * If the stack represents an exception, and the function call returns a ‘true’ value, this information is “zapped” and
-     * replaced with a single WHY_SILENCED to prevent END_FINALLY from re-raising the exception. (But non-local gotos will still be resumed.)
+     * If the stack represents an exception, and the function call returns a ‘true’ value, this information is “zapped”
+     * and replaced with a single WHY_SILENCED to prevent END_FINALLY from re-raising the exception.
+     * (But non-local gotos will still be resumed.)
      */
 
     // All of the following opcodes expect arguments. An argument is two bytes, with the more significant byte last.
@@ -823,10 +844,11 @@ public class VirtualMachine {
     /**
      * UNPACK_EX(counts)
      * Implements assignment with a starred target: Unpacks an iterable in TOS into individual values,
-     * where the total number of values can be smaller than the number of items in the iterable: one the new values will be a list of all leftover items.
+     * where the total number of values can be smaller than the number of items in the iterable: one the new values
+     * will be a list of all leftover items.
      *
-     * The low byte of counts is the number of values before the list value, the high byte of counts the number of values after it.
-     * The resulting values are put onto the stack right-to-left.
+     * The low byte of counts is the number of values before the list value, the high byte of counts the number of
+     * values after it. The resulting values are put onto the stack right-to-left.
      */
 
     /**
@@ -936,7 +958,8 @@ public class VirtualMachine {
 
     /**
      * IMPORT_NAME(namei)
-     * Imports the module co_names[namei]. TOS and TOS1 are popped and provide the fromlist and level arguments of __import__().
+     * Imports the module co_names[namei]. TOS and TOS1 are popped and provide the fromlist and level arguments of
+     * __import__().
      * The module object is pushed onto the stack. The current namespace is not affected: for a proper import statement,
      * a subsequent STORE_FAST instruction modifies the namespace.
      */
@@ -1025,8 +1048,9 @@ public class VirtualMachine {
 
     /**
      * FOR_ITER(delta)
-     * TOS is an iterator. Call its __next__() method. If this yields a new value, push it on the stack (leaving the iterator below it).
-     * If the iterator indicates it is exhausted TOS is popped, and the byte code counter is incremented by delta.
+     * TOS is an iterator. Call its __next__() method. If this yields a new value, push it on the stack (leaving the
+     * iterator below it). If the iterator indicates it is exhausted TOS is popped, and the byte code counter is
+     * incremented by delta.
      */
 
     /**
@@ -1036,7 +1060,8 @@ public class VirtualMachine {
 
     /**
      * SETUP_LOOP(delta)
-     * Pushes a block for a loop onto the block stack. The block spans from the current instruction with a size of delta bytes.
+     * Pushes a block for a loop onto the block stack. The block spans from the current instruction with a size of
+     * delta bytes.
      */
     private void setupLoop(int delta) {
         pushBlock(Block.BlockType.LOOP, currentFrame.bytecodeCounter + delta);
@@ -1076,17 +1101,20 @@ public class VirtualMachine {
     /**
      * LOAD_CLOSURE(i)
      * Pushes a reference to the cell contained in slot i of the cell and free variable storage.
-     * The name of the variable is co_cellvars[i] if i is less than the length of co_cellvars. Otherwise it is co_freevars[i - len(co_cellvars)].
+     * The name of the variable is co_cellvars[i] if i is less than the length of co_cellvars. Otherwise it is
+     * co_freevars[i - len(co_cellvars)].
      */
 
     /**
      * LOAD_DEREF(i)
-     * Loads the cell contained in slot i of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
+     * Loads the cell contained in slot i of the cell and free variable storage. Pushes a reference to the object the
+     * cell contains on the stack.
      */
 
     /**
      * LOAD_CLASSDEREF(i)
-     * Much like LOAD_DEREF but first checks the locals dictionary before consulting the cell. This is used for loading free variables in class bodies.
+     * Much like LOAD_DEREF but first checks the locals dictionary before consulting the cell. This is used for loading
+     * free variables in class bodies.
      */
 
     /**
@@ -1107,8 +1135,10 @@ public class VirtualMachine {
 
     /**
      * CALL_FUNCTION(argc)
-     * Calls a function. The low byte of argc indicates the number of positional parameters, the high byte the number of keyword parameters.
-     * On the stack, the opcode finds the keyword parameters first. For each keyword argument, the value is on top of the key.
+     * Calls a function. The low byte of argc indicates the number of positional parameters, the high byte the number
+     * of keyword parameters.
+     * On the stack, the opcode finds the keyword parameters first. For each keyword argument, the value is on top of
+     * the key.
      * Below the keyword parameters, the positional parameters are on the stack, with the right-most parameter on top.
      * Below the parameters, the function object to call is on the stack. Pops all function arguments,
      * and the function itself off the stack, and pushes the return value.
@@ -1138,7 +1168,8 @@ public class VirtualMachine {
      * MAKE_FUNCTION(argc)
      * Pushes a new function object on the stack. From bottom to top, the consumed stack must consist of
      * argc & 0xFF default argument objects in positional order
-     * (argc >> 8) & 0xFF pairs of name and default argument, with the name just below the object on the stack, for keyword-only parameters
+     * (argc >> 8) & 0xFF pairs of name and default argument, with the name just below the object on the stack,
+     * for keyword-only parameters
      * (argc >> 16) & 0x7FFF parameter annotation objects
      * a tuple listing the parameter names for the annotations (only if there are ony annotation objects)
      * the code associated with the function (at TOS1)
@@ -1171,38 +1202,41 @@ public class VirtualMachine {
 
     /**
      * BUILD_SLICE(argc)
-     * Pushes a slice object on the stack. argc must be 2 or 3. If it is 2, slice(TOS1, TOS) is pushed; if it is 3, slice(TOS2, TOS1, TOS) is pushed.
-     * See the slice() built-in function for more information.
+     * Pushes a slice object on the stack. argc must be 2 or 3. If it is 2, slice(TOS1, TOS) is pushed; if it is 3,
+     * slice(TOS2, TOS1, TOS) is pushed. See the slice() built-in function for more information.
      */
 
     /**
      * EXTENDED_ARG(ext)
-     * Prefixes any opcode which has an argument too big to fit into the default two bytes. ext holds two additional bytes which,
-     * taken together with the subsequent opcode’s argument, comprise a four-byte argument, ext being the two most-significant bytes.
+     * Prefixes any opcode which has an argument too big to fit into the default two bytes. ext holds two additional
+     * bytes which, taken together with the subsequent opcode’s argument, comprise a four-byte argument, ext being the
+     * two most-significant bytes.
      */
 
     /**
      * CALL_FUNCTION_VAR(argc)
-     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the variable argument list,
-     * followed by keyword and positional arguments.
+     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the variable
+     * argument list, followed by keyword and positional arguments.
      */
 
     /**
      * CALL_FUNCTION_KW(argc)
-     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the keyword arguments dictionary,
-     * followed by explicit keyword and positional arguments.
+     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the keyword
+     * arguments dictionary, followed by explicit keyword and positional arguments.
      */
 
     /**
      * CALL_FUNCTION_VAR_KW(argc)
-     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the keyword arguments dictionary,
-     * followed by the variable-arguments tuple, followed by explicit keyword and positional arguments.
+     * Calls a function. argc is interpreted as in CALL_FUNCTION. The top element on the stack contains the keyword
+     * arguments dictionary, followed by the variable-arguments tuple, followed by explicit keyword and positional
+     * arguments.
      */
 
     /**
      * HAVE_ARGUMENT
      * This is not really an opcode.
-     * It identifies the dividing line between opcodes which don’t take arguments < HAVE_ARGUMENT and those which do >= HAVE_ARGUMENT.
+     * It identifies the dividing line between opcodes which don’t take arguments < HAVE_ARGUMENT and those which do
+     * >= HAVE_ARGUMENT.
      */
 
     // #################################################################################################################
