@@ -7,23 +7,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class Frame {
-    public Stack<Object> valueStack;
-    public Stack<Block> blockStack;
+class Frame {
+    Stack<Object> valueStack;
+    Stack<Block> blockStack;
 
-    public Frame previousFrame;
-    public PyCodeObject pyCodeObject;
+    Frame previousFrame;
+    PyCodeObject pyCodeObject;
 
-    public int bytecodeCounter;
-    public int bytecodeSize;
+    int bytecodeCounter;
+    int bytecodeSize;
 
     private Map<String, Object> locals;
 
-    public Frame(PyCodeObject pyCodeObject, Frame previousFrame) {
+    Frame(PyCodeObject pyCodeObject, Frame previousFrame) {
         this(pyCodeObject, previousFrame, new HashMap<>());
     }
 
-    public Frame(PyCodeObject pyCodeObject, Frame previousFrame, Map<String, Object> locals) {
+    Frame(PyCodeObject pyCodeObject, Frame previousFrame, Map<String, Object> locals) {
         this.pyCodeObject = pyCodeObject;
         this.previousFrame = previousFrame;
 
@@ -35,17 +35,17 @@ public class Frame {
         this.bytecodeSize = pyCodeObject.getCodeLength();
     }
 
-    public boolean isInLocals(String key) {
+    boolean isInLocals(String key) {
         return locals.containsKey(key);
     }
 
-    public Object getVariableByName(String name) {
+    Object getVariableByName(String name) {
         if (!locals.containsKey(name))
             throw new NullPointerException();
         return locals.get(name);
     }
 
-    public void setVariable(String name, Object value) {
+    void setVariable(String name, Object value) {
         locals.put(name, value);
     }
 

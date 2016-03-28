@@ -3,9 +3,9 @@ package com.andrea.vm;
 
 import org.jetbrains.annotations.Contract;
 
-public class Builtins {
+class Builtins {
 
-    public static final String[] builtins = {"ArithmeticError", "AssertionError", "AttributeError", "BaseException",
+    private static final String[] builtins = {"ArithmeticError", "AssertionError", "AttributeError", "BaseException",
             "BlockingIOError", "BrokenPipeError", "BufferError", "BytesWarning", "ChildProcessError",
             "ConnectionAbortedError", "ConnectionError", "ConnectionRefusedError", "ConnectionResetError",
             "DeprecationWarning", "EOFError", "Ellipsis", "EnvironmentError", "Exception", "False", "FileExistsError",
@@ -28,14 +28,14 @@ public class Builtins {
             "vars", "zip"};
 
     @Contract(pure = true)
-    public static boolean isBuiltin(String st) {
+    static boolean isBuiltin(String st) {
         for (String s : builtins)
             if (st.equals(s))
                 return true;
         return false;
     }
 
-    public static void print(Object object) {
+    static void print(Object object) {
         System.out.println(object);
     }
 

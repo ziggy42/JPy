@@ -1,15 +1,15 @@
 package com.andrea.vm;
 
 
-public class Block {
-    public enum BlockType {
+class Block {
+    enum BlockType {
         LOOP,
     }
 
-    public BlockType blockType;
-    public int dest;
+    BlockType blockType;
+    int dest;
 
-    public Block(BlockType blockType, int dest) {
+    Block(BlockType blockType, int dest) {
         this.blockType = blockType;
         this.dest = dest;
     }
