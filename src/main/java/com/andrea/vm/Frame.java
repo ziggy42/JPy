@@ -12,23 +12,27 @@ public class Frame {
     public Stack<Block> blockStack;
 
     public Frame previousFrame;
-    public PyCodeObject codeObject;
+    public PyCodeObject pyCodeObject;
 
     public int bytecodeCounter;
     public int bytecodeSize;
 
     private Map<String, Object> locals;
 
-    public Frame(PyCodeObject codeObject, Frame previousFrame) {
-        this.codeObject = codeObject;
+    public Frame(PyCodeObject pyCodeObject, Frame previousFrame) {
+        this(pyCodeObject, previousFrame, new HashMap<>());
+    }
+
+    public Frame(PyCodeObject pyCodeObject, Frame previousFrame, Map<String, Object> locals) {
+        this.pyCodeObject = pyCodeObject;
         this.previousFrame = previousFrame;
 
         this.valueStack = new Stack<>();
         this.blockStack = new Stack<>();
-        this.locals = new HashMap<>();
+        this.locals = locals;
 
         this.bytecodeCounter = 0;
-        this.bytecodeSize = codeObject.getCodeLength();
+        this.bytecodeSize = pyCodeObject.getCodeLength();
     }
 
     public boolean isInLocals(String key) {

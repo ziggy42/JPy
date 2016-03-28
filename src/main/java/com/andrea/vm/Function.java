@@ -17,7 +17,7 @@ public class Function {
     }
 
     public Object call(Object[] args) throws Exception{
-        Frame frame = virtualMachine.createFrame(codeObject);
+        Frame frame = virtualMachine.createFrame(codeObject, args);
         return virtualMachine.runFrame(frame);
     }
 }

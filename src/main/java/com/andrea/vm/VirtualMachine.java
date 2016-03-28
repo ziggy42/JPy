@@ -4,6 +4,8 @@ package com.andrea.vm;
 import com.andrea.pyobjects.PyCodeObject;
 import com.andrea.utils.Utils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -44,6 +46,13 @@ public class VirtualMachine {
         return new Frame(pyCodeObject, currentFrame);
     }
 
+    public Frame createFrame(PyCodeObject pyCodeObject, Object[] args) {
+        Map<String, Object> locals = new HashMap<>(args.length);
+        for (int i = 0; i < args.length; i++)
+            locals.put(pyCodeObject.getVarName(i), args[i]);
+        return new Frame(pyCodeObject, currentFrame, locals);
+    }
+
     private void pushFrame(Frame frame) {
         currentFrame = frame;
         callStack.push(frame);
@@ -57,7 +66,7 @@ public class VirtualMachine {
     public Object runFrame(Frame frame) throws Exception {
         pushFrame(frame);
 
-        Integer[] code = frame.codeObject.getCo_code();
+        Integer[] code = frame.pyCodeObject.getCo_code();
         while (currentFrame.bytecodeCounter < currentFrame.bytecodeSize) {
             int instruction = code[currentFrame.bytecodeCounter];
             currentFrame.bytecodeCounter++;
@@ -834,7 +843,7 @@ public class VirtualMachine {
      * The compiler tries to use STORE_FAST or STORE_GLOBAL if possible.
      */
     private void storeName(int namei) {
-        currentFrame.setVariable(currentFrame.codeObject.getName(namei), pop());
+        currentFrame.setVariable(currentFrame.pyCodeObject.getName(namei), pop());
     }
 
     /**
@@ -882,7 +891,7 @@ public class VirtualMachine {
      * Pushes co_consts[consti] onto the stack.
      */
     private void loadConst(int consti) {
-        push(currentFrame.codeObject.getConst(consti));
+        push(currentFrame.pyCodeObject.getConst(consti));
     }
 
     /**
@@ -890,14 +899,14 @@ public class VirtualMachine {
      * Pushes the value associated with co_names[namei] onto the stack.
      */
     private void loadName(int namei) throws Exception {
-        String name = currentFrame.codeObject.getName(namei);
+        String name = currentFrame.pyCodeObject.getName(namei);
         if (currentFrame.isInLocals(name))
             push(currentFrame.getVariableByName(name));
             // globals
         else if (Builtins.isBuiltin(name))
             push(name);
         else
-            throw new Exception("name " + currentFrame.codeObject.getName(namei) + " is not defined");
+            throw new Exception("name " + currentFrame.pyCodeObject.getName(namei) + " is not defined");
 
     }
 
@@ -1090,7 +1099,7 @@ public class VirtualMachine {
      * Pushes a reference to the local co_varnames[var_num] onto the stack.
      */
     private void loadFast(int varNum) {
-        push(currentFrame.getVariableByName(currentFrame.codeObject.getVarName(varNum)));
+        push(currentFrame.getVariableByName(currentFrame.pyCodeObject.getVarName(varNum)));
     }
 
     /**
@@ -1098,7 +1107,7 @@ public class VirtualMachine {
      * Stores TOS into the local co_varnames[var_num].
      */
     private void storeFast(int varNum) {
-        currentFrame.setVariable(currentFrame.codeObject.getVarName(varNum), pop());
+        currentFrame.setVariable(currentFrame.pyCodeObject.getVarName(varNum), pop());
     }
 
     /**
@@ -1158,12 +1167,11 @@ public class VirtualMachine {
         popN(keywordParams * 2); // TODO
         Object[] posParams = popN(nPosParams);
 
-        String functionName = (String) pop();
-        if (currentFrame.isInLocals(functionName)) {
-            Function function = (Function) pop();
-            push(function.call(posParams));
-        } else if (Builtins.isBuiltin(functionName)) {
-            switch (functionName) {
+        Object funObject = pop();
+        if (funObject instanceof Function) {
+            push(((Function) funObject).call(posParams));
+        } else if (Builtins.isBuiltin((String) funObject)) {
+            switch ((String) funObject) {
                 case "print":
                     Builtins.print(posParams[0]);
                     push(null);
@@ -1197,7 +1205,6 @@ public class VirtualMachine {
         Object[] defaults = popN(nDefaultArgumentObjects);
         Function function = new Function(this, functionName, pyCodeObject, defaults);
         push(function);
-        push(functionName);
     }
 
     /**

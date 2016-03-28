@@ -242,5 +242,47 @@ public class VirtualMachineTest {
         virtualMachine.runCode(pyCodeObject);
         assertEquals("Hello, World!\n", outContent.toString());
         outContent.reset();
+
+        /*
+        def sum(a, b):
+	        return a + b
+        print(sum(1,2))
+         */
+        test = "0\n" +
+                "0\n" +
+                "4\n" +
+                "64\n" +
+                "100 0 0 100 1 0 132 0 0 90 0 0 101 1 0 101 0 0 100 2 0 100 3 0 131 2 0 131 1 0 1 100 4 0 83\n" +
+                "5\n" +
+                "SOC\n" +
+                "2\n" +
+                "2\n" +
+                "2\n" +
+                "67\n" +
+                "124 0 0 124 1 0 23 83\n" +
+                "1\n" +
+                "None\n" +
+                "\n" +
+                "a b\n" +
+                "\n" +
+                "\n" +
+                "tests/test2.py\n" +
+                "sum\n" +
+                "0\n" +
+                "'sum'\n" +
+                "1\n" +
+                "2\n" +
+                "None\n" +
+                "sum print\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "tests/test2.py\n" +
+                "<module>\n" +
+                "0";
+        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        virtualMachine.runCode(pyCodeObject);
+        assertEquals("3\n", outContent.toString());
+        outContent.reset();
     }
 }
