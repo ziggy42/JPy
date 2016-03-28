@@ -6,6 +6,11 @@ import com.andrea.utils.Utils;
 
 import java.util.Stack;
 
+/**
+ * Virtual Machine that runs the bytecode
+ * PLEASE NOTE:
+ * a) this virtual machine uses Long for ALL the natural numbers and Double for all the real ones.
+ */
 public class VirtualMachine {
 
     private static final int LT = 0; // <
