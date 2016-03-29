@@ -1224,9 +1224,9 @@ public class VirtualMachine {
                     if (posParams.length == 1)
                         push(Builtins.range((long) posParams[0]));
                     else if (posParams.length == 2)
-                        push(Builtins.range((long) posParams[0], (long) posParams[1]));
+                        push(Builtins.range((long) posParams[1], (long) posParams[0]));
                     else
-                        push(Builtins.range((long) posParams[0], (long) posParams[1], (long) posParams[2]));
+                        push(Builtins.range((long) posParams[2], (long) posParams[1], (long) posParams[0]));
                     break;
             }
         }
