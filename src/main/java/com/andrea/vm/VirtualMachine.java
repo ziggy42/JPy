@@ -1215,20 +1215,7 @@ public class VirtualMachine {
         if (funObject instanceof Function) {
             push(((Function) funObject).call(posParams));
         } else if (Builtins.isBuiltin((String) funObject)) {
-            switch ((String) funObject) {
-                case "print":
-                    Builtins.print(posParams[0]);
-                    push(null);
-                    break;
-                case "range":
-                    if (posParams.length == 1)
-                        push(Builtins.range((long) posParams[0]));
-                    else if (posParams.length == 2)
-                        push(Builtins.range((long) posParams[1], (long) posParams[0]));
-                    else
-                        push(Builtins.range((long) posParams[2], (long) posParams[1], (long) posParams[0]));
-                    break;
-            }
+            push(Builtins.call((String) funObject, posParams));
         }
     }
 

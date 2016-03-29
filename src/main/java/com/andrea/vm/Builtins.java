@@ -36,19 +36,20 @@ class Builtins {
         return false;
     }
 
-    static void print(Object object) {
-        System.out.println(object);
-    }
-
-    static Object range(long stop) {
-        return range(0, stop, 1);
-    }
-
-    static Object range(long start, long stop) {
-        return range(start, stop, 1);
-    }
-
-    static Object range(long start, long stop, long step) {
-        return new PyRange(start, stop, step);
+    static Object call(String functionName, Object[] posParams) {
+        switch (functionName) {
+            case "print":
+                System.out.println(posParams[0]);
+                return null;
+            case "range":
+                if (posParams.length == 1)
+                    return new PyRange(0, (long) posParams[0], 0);
+                else if (posParams.length == 2)
+                    return new PyRange((long) posParams[1], (long) posParams[0], 0);
+                else
+                    return new PyRange((long) posParams[2], (long) posParams[1], (long) posParams[0]);
+            default:
+                throw new UnsupportedOperationException();
+        }
     }
 }
