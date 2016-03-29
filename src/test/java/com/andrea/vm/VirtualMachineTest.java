@@ -298,5 +298,31 @@ public class VirtualMachineTest {
         virtualMachine.runCode(pyCodeObject);
         assertEquals("5\n", outContent.toString());
         outContent.reset();
+
+        /*
+        for i in range(10, 20, 2):
+            print(i)
+         */
+        test = "0\n" +
+                "0\n" +
+                "4\n" +
+                "64\n" +
+                "120 36 0 101 0 0 100 0 0 100 1 0 100 2 0 131 3 0 68 93 16 0 90 1 0 101 2 0 101 1 0 131 1 0 1 113 19 0 87 100 3 0 83\n" +
+                "4\n" +
+                "10\n" +
+                "20\n" +
+                "2\n" +
+                "None\n" +
+                "range i print\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "../test/testfor.py\n" +
+                "<module>\n" +
+                "0";
+        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        virtualMachine.runCode(pyCodeObject);
+        assertEquals("10\n12\n14\n16\n18\n", outContent.toString());
+        outContent.reset();
     }
 }
