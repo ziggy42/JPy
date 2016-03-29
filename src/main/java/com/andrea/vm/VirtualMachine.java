@@ -405,8 +405,6 @@ public class VirtualMachine {
 
     // Helper methods for working with the currentFrame blockStack
     private void pushBlock(Block.BlockType blockType, int delta) {
-
-        // TODO non è proprio così
         Block block = new Block(blockType, delta);
         currentFrame.blockStack.push(block);
     }
@@ -723,7 +721,36 @@ public class VirtualMachine {
     // In-place operations are like binary operations, in that they remove TOS and TOS1, and push the result back on
     // the stack, but the operation is done in-place when TOS1 supports it, and the resulting TOS may be
     // (but does not have to be) the original TOS1.
-    // TODO In-place operations
+
+    /**
+     * INPLACE_POWER
+     * Implements in-place TOS = TOS1 ** TOS.
+     */
+
+    /**
+     * INPLACE_MULTIPLY
+     * Implements in-place TOS = TOS1 * TOS.
+     */
+
+    /**
+     * INPLACE_MATRIX_MULTIPLY
+     * Implements in-place TOS = TOS1 @ TOS.
+     */
+
+    /**
+     * INPLACE_FLOOR_DIVIDE
+     * Implements in-place TOS = TOS1 // TOS.
+     */
+
+    /**
+     * INPLACE_TRUE_DIVIDE
+     * Implements in-place TOS = TOS1 / TOS when from __future__ import division is in effect.
+     */
+
+    /**
+     * INPLACE_MODULO
+     * Implements in-place TOS = TOS1 % TOS.
+     */
 
     /**
      * INPLACE_ADD
@@ -733,8 +760,74 @@ public class VirtualMachine {
         binaryAdd();
     }
 
+    /**
+     * INPLACE_SUBTRACT
+     * Implements in-place TOS = TOS1 - TOS.
+     */
+
+    /**
+     * INPLACE_LSHIFT
+     * Implements in-place TOS = TOS1 << TOS.
+     */
+
+    /**
+     * INPLACE_RSHIFT
+     * Implements in-place TOS = TOS1 >> TOS.
+     */
+
+    /**
+     * INPLACE_AND
+     * Implements in-place TOS = TOS1 & TOS.
+     */
+
+    /**
+     * INPLACE_XOR
+     * Implements in-place TOS = TOS1 ^ TOS.
+     */
+
+    /**
+     * INPLACE_OR
+     * Implements in-place TOS = TOS1 | TOS.
+     */
+
+    /**
+     * STORE_SUBSCR
+     * Implements TOS1[TOS] = TOS2.
+     */
+
+    /**
+     * DELETE_SUBSCR
+     * Implements del TOS1[TOS].
+     */
+
     // Coroutine opcodes
-    // TODO Coroutine opcodes
+
+    /**
+     * GET_AWAITABLE
+     * Implements TOS = get_awaitable(TOS), where get_awaitable(o) returns o if o is a coroutine object or a generator
+     * object with the CO_ITERABLE_COROUTINE flag, or resolves o.__await__.
+     */
+
+    /**
+     * GET_AITER
+     * Implements TOS = get_awaitable(TOS.__aiter__()). See GET_AWAITABLE for details about get_awaitable
+     */
+
+    /**
+     * GET_ANEXT
+     * Implements PUSH(get_awaitable(TOS.__anext__())). See GET_AWAITABLE for details about get_awaitable
+     */
+
+    /**
+     * BEFORE_ASYNC_WITH
+     * Resolves __aenter__ and __aexit__ from the object on top of the stack.
+     * Pushes __aexit__ and result of __aenter__() to the stack.
+     */
+
+    /**
+     * SETUP_ASYNC_WITH
+     * Creates a new frame object.
+     */
 
     // Miscellaneous opcodes
 
