@@ -71,36 +71,6 @@ public class VirtualMachineTest {
         assertEquals("0\nno\n2\nmeh\n4\nno\n6\nno\n8\nmeh\n10\n", outContent.toString());
         outContent.reset();
 
-        test = "0\n" +
-                "0\n" +
-                "3\n" +
-                "64\n" +
-                "101 0 0 100 7 0 131 1 0 1 101 0 0 100 8 0 131 1 0 1 101 0 0 100 9 0 131 1 0 1 100 6 0 83\n" +
-                "10\n" +
-                "'Hello, '\n" +
-                "'World!'\n" +
-                "7\n" +
-                "5\n" +
-                "'a'\n" +
-                "'b'\n" +
-                "None\n" +
-                "'Hello, World!'\n" +
-                "12\n" +
-                "'ab'\n" +
-                "print\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "tests/test1.py\n" +
-                "<module>\n" +
-                "1\n" +
-                "0\n" +
-                "b'\\n\\x01\\n\\x01'\n";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
-        virtualMachine.runCode(pyCodeObject);
-        assertEquals("Hello, World!\n12\nab\n", outContent.toString());
-        outContent.reset();
-
         /*
         a = 1
         b = 2
@@ -283,6 +253,50 @@ public class VirtualMachineTest {
         pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("3\n", outContent.toString());
+        outContent.reset();
+
+        /*
+        def sum(a):
+            return a + b
+
+        b = 3
+        print(sum(2))
+         */
+        test = "0\n" +
+                "0\n" +
+                "3\n" +
+                "64\n" +
+                "100 0 0 100 1 0 132 0 0 90 0 0 100 2 0 90 1 0 101 2 0 101 0 0 100 3 0 131 1 0 131 1 0 1 100 4 0 83\n" +
+                "5\n" +
+                "SOC\n" +
+                "1\n" +
+                "1\n" +
+                "2\n" +
+                "67\n" +
+                "124 0 0 116 0 0 23 83\n" +
+                "1\n" +
+                "None\n" +
+                "b\n" +
+                "a\n" +
+                "\n" +
+                "\n" +
+                "../JPY_Build/tests/test.py\n" +
+                "sum\n" +
+                "0\n" +
+                "'sum'\n" +
+                "3\n" +
+                "2\n" +
+                "None\n" +
+                "sum b print\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "../JPY_Build/tests/test.py\n" +
+                "<module>\n" +
+                "0\n";
+        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        virtualMachine.runCode(pyCodeObject);
+        assertEquals("5\n", outContent.toString());
         outContent.reset();
     }
 }

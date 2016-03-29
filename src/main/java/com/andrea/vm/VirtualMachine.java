@@ -3,6 +3,7 @@ package com.andrea.vm;
 
 import com.andrea.pyobjects.PyCodeObject;
 import com.andrea.utils.Utils;
+import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,14 +40,27 @@ public class VirtualMachine {
     }
 
     public Object runCode(PyCodeObject pyCodeObject) throws Exception {
-        return runFrame(createFrame(pyCodeObject, new Object[0]));
+        return runFrame(createFrame(pyCodeObject, null, null, null));
     }
 
-    Frame createFrame(PyCodeObject pyCodeObject, Object[] args) {
-        Map<String, Object> locals = new HashMap<>(args.length);
-        for (int i = 0; i < args.length; i++)
-            locals.put(pyCodeObject.getVarName(i), args[i]);
-        return new Frame(pyCodeObject, currentFrame, locals);
+    Frame createFrame(PyCodeObject pyCodeObject, @Nullable Object[] callArgs, @Nullable Map<String, Object> globals,
+                      @Nullable Map<String, Object> locals) {
+        Map<String, Object> nLocals = new HashMap<>(), nGlobals = new HashMap<>();
+        if (globals != null)
+            nGlobals.putAll(globals);
+
+        if (locals != null)
+            nGlobals.putAll(locals);
+
+        if (callArgs != null)
+            for (int i = 0; i < callArgs.length; i++)
+                nLocals.put(pyCodeObject.getVarName(i), callArgs[i]);
+
+        return new Frame(pyCodeObject, currentFrame, nGlobals, nLocals);
+    }
+
+    Frame getCurrentFrame() {
+        return this.currentFrame;
     }
 
     private void pushFrame(Frame frame) {
@@ -275,6 +289,8 @@ public class VirtualMachine {
                             code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 116: // LOAD_GLOBAL
+                    loadGlobal(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 119: // CONTINUE_LOOP
                     break;
@@ -898,13 +914,13 @@ public class VirtualMachine {
     private void loadName(int namei) throws Exception {
         String name = currentFrame.pyCodeObject.getName(namei);
         if (currentFrame.isInLocals(name))
-            push(currentFrame.getVariableByName(name));
-            // globals
+            push(currentFrame.getLocalVariableByName(name));
+        else if (currentFrame.isInGlobals(name))
+            push(currentFrame.getGlobalVariableByName(name));
         else if (Builtins.isBuiltin(name))
             push(name);
         else
             throw new Exception("name " + currentFrame.pyCodeObject.getName(namei) + " is not defined");
-
     }
 
     /**
@@ -1071,6 +1087,9 @@ public class VirtualMachine {
      * LOAD_GLOBAL(namei)
      * Loads the global named co_names[namei] onto the stack.
      */
+    private void loadGlobal(int namei) {
+        push(currentFrame.getGlobalVariableByName(currentFrame.pyCodeObject.getName(namei)));
+    }
 
     /**
      * SETUP_LOOP(delta)
@@ -1096,7 +1115,7 @@ public class VirtualMachine {
      * Pushes a reference to the local co_varnames[var_num] onto the stack.
      */
     private void loadFast(int varNum) {
-        push(currentFrame.getVariableByName(currentFrame.pyCodeObject.getVarName(varNum)));
+        push(currentFrame.getLocalVariableByName(currentFrame.pyCodeObject.getVarName(varNum)));
     }
 
     /**
