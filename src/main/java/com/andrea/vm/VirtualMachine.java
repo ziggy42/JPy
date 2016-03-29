@@ -235,6 +235,8 @@ public class VirtualMachine {
                 case 96: // DELETE_ATTR
                     break;
                 case 97: // STORE_GLOBAL
+                    storeGlobal(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 98: // DELETE_GLOBAL
                     break;
@@ -893,6 +895,10 @@ public class VirtualMachine {
      * STORE_GLOBAL(namei)
      * Works as STORE_NAME, but stores the name as a global.
      */
+    private void storeGlobal(int namei) {
+        currentFrame.setGlobalVariable(currentFrame.pyCodeObject.getName(namei), pop());
+    }
+
 
     /**
      * DELETE_GLOBAL(namei)

@@ -60,4 +60,8 @@ class Frame {
         locals.put(name, value);
     }
 
+    void setGlobalVariable(String name, Object value) {
+        locals.put(name, value);
+    }
+
 }
