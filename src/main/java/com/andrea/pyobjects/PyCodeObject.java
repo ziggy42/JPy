@@ -148,7 +148,7 @@ public class PyCodeObject {
         return stringBuilder.toString();
     }
 
-    public static PyCodeObject buildPyCodeObjext(BufferedReader in) throws Exception {
+    public static PyCodeObject buildPyCodeObject(BufferedReader in) throws Exception {
         int co_argcount = Integer.parseInt(in.readLine());
         int co_nlocals = Integer.parseInt(in.readLine());
         int co_stacksize = Integer.parseInt(in.readLine());
@@ -164,7 +164,7 @@ public class PyCodeObject {
         for (int i = 0; i < nConsts; i++) {
             String cons = in.readLine();
             if ("SOC".equals(cons))
-                consts.add(PyCodeObject.buildPyCodeObjext(in));
+                consts.add(PyCodeObject.buildPyCodeObject(in));
             else if (cons.startsWith("'") && cons.endsWith("'"))
                 consts.add(cons.substring(1, cons.length() - 1));
             else if ("None".equals(cons))

@@ -66,7 +66,7 @@ public class VirtualMachineTest {
                 "1\n" +
                 "0\n" +
                 "b'\\x06\\x01\\x0f\\x01\\x10\\x01\\r\\x01\\x10\\x01\\r\\x02\\n\\x01'\n";
-        PyCodeObject pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        PyCodeObject pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("0\nno\n2\nmeh\n4\nno\n6\nno\n8\nmeh\n10\n", outContent.toString());
         outContent.reset();
@@ -97,7 +97,7 @@ public class VirtualMachineTest {
                 "1\n" +
                 "0\n" +
                 "b'\\x06\\x01\\x06\\x01\\x06\\x01\\n\\x01'\n";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("2\n", outContent.toString());
         outContent.reset();
@@ -133,7 +133,7 @@ public class VirtualMachineTest {
                 "1\n" +
                 "0\n" +
                 "b'\\x06\\x01\\x0f\\x01\\x06\\x01\\x0f\\x01\\x0e\\x01\\x0e\\x01'\n";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("10\n", outContent.toString());
         outContent.reset();
@@ -165,7 +165,7 @@ public class VirtualMachineTest {
                 "1\n" +
                 "0\n" +
                 "b'\\x06\\x01\\x03\\x01\\n\\x01\\x0c\\x01\\x05\\x01'\n";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("8\n", outContent.toString());
         outContent.reset();
@@ -208,7 +208,7 @@ public class VirtualMachineTest {
                 "tests/test1.py\n" +
                 "<module>\n" +
                 "0";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("Hello, World!\n", outContent.toString());
         outContent.reset();
@@ -250,7 +250,7 @@ public class VirtualMachineTest {
                 "tests/test2.py\n" +
                 "<module>\n" +
                 "0";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("3\n", outContent.toString());
         outContent.reset();
@@ -294,7 +294,7 @@ public class VirtualMachineTest {
                 "../JPY_Build/tests/test.py\n" +
                 "<module>\n" +
                 "0\n";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("5\n", outContent.toString());
         outContent.reset();
@@ -320,7 +320,7 @@ public class VirtualMachineTest {
                 "../test/testfor.py\n" +
                 "<module>\n" +
                 "0";
-        pyCodeObject = PyCodeObject.buildPyCodeObjext(new BufferedReader(new StringReader(test)));
+        pyCodeObject = PyCodeObject.buildPyCodeObject(new BufferedReader(new StringReader(test)));
         virtualMachine.runCode(pyCodeObject);
         assertEquals("10\n12\n14\n16\n18\n", outContent.toString());
         outContent.reset();

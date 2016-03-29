@@ -21,7 +21,7 @@ public class Main {
         }
 
         BufferedReader in = new BufferedReader(new FileReader(filePath));
-        PyCodeObject pyCodeObject = PyCodeObject.buildPyCodeObjext(in);
+        PyCodeObject pyCodeObject = PyCodeObject.buildPyCodeObject(in);
         in.close();
 
         VirtualMachine vm = new VirtualMachine();
