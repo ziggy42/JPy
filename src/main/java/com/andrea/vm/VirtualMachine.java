@@ -6,6 +6,7 @@ import com.andrea.utils.Utils;
 import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
@@ -175,6 +176,7 @@ public class VirtualMachine {
                 case 67: // INPLACE_POWER
                     break;
                 case 68: // GET_ITER
+                    getIter();
                     break;
                 case 69: // GET_YIELD_FROM_ITER
                     break;
@@ -227,6 +229,8 @@ public class VirtualMachine {
                 case 92: // UNPACK_SEQUENCE
                     break;
                 case 93: // FOR_ITER
+                    forIter(Utils.twoBytesToInt(code[currentFrame.bytecodeCounter++].byteValue(),
+                            code[currentFrame.bytecodeCounter++].byteValue()));
                     break;
                 case 94: // UNPACK_EX
                     break;
@@ -530,6 +534,12 @@ public class VirtualMachine {
      * GET_ITER
      * Implements TOS = iter(TOS).
      */
+    private void getIter() {
+        Object tos = pop();
+        if (!(tos instanceof Iterable))
+            throw new UnsupportedOperationException();
+        push(((Iterable) tos).iterator());
+    }
 
     /**
      * GET_YIELD_FROM_ITER
@@ -1088,6 +1098,18 @@ public class VirtualMachine {
      * iterator below it). If the iterator indicates it is exhausted TOS is popped, and the byte code counter is
      * incremented by delta.
      */
+    private void forIter(int delta) {
+        Object tos = peek();
+        if (!(tos instanceof Iterator))
+            throw new UnsupportedOperationException();
+        Iterator iterTos = (Iterator) tos;
+        if (iterTos.hasNext()) {
+            push(iterTos.next());
+        } else {
+            pop();
+            currentFrame.bytecodeCounter += delta;
+        }
+    }
 
     /**
      * LOAD_GLOBAL(namei)
@@ -1197,6 +1219,14 @@ public class VirtualMachine {
                 case "print":
                     Builtins.print(posParams[0]);
                     push(null);
+                    break;
+                case "range":
+                    if (posParams.length == 1)
+                        push(Builtins.range((long) posParams[0]));
+                    else if (posParams.length == 2)
+                        push(Builtins.range((long) posParams[0], (long) posParams[1]));
+                    else
+                        push(Builtins.range((long) posParams[0], (long) posParams[1], (long) posParams[2]));
                     break;
             }
         }

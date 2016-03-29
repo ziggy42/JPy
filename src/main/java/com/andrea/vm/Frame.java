@@ -37,14 +37,10 @@ class Frame {
     }
 
     Object getLocalVariableByName(String name) {
-        if (!locals.containsKey(name))
-            throw new NullPointerException();
         return locals.get(name);
     }
 
     Object getGlobalVariableByName(String key) {
-        if (!globals.containsKey(key))
-            throw new NullPointerException();
         return globals.get(key);
     }
 

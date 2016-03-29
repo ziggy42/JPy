@@ -1,6 +1,7 @@
 package com.andrea.vm;
 
 
+import com.andrea.pyobjects.PyRange;
 import org.jetbrains.annotations.Contract;
 
 class Builtins {
@@ -39,4 +40,15 @@ class Builtins {
         System.out.println(object);
     }
 
+    static Object range(long stop) {
+        return range(0, stop, 1);
+    }
+
+    static Object range(long start, long stop) {
+        return range(start, stop, 1);
+    }
+
+    static Object range(long start, long stop, long step) {
+        return new PyRange(start, stop, step);
+    }
 }
