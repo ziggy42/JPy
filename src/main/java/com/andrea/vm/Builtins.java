@@ -4,6 +4,8 @@ package com.andrea.vm;
 import com.andrea.pyobjects.PyRange;
 import org.jetbrains.annotations.Contract;
 
+import java.util.Scanner;
+
 class Builtins {
 
     private static final String[] builtins = {"ArithmeticError", "AssertionError", "AttributeError", "BaseException",
@@ -38,6 +40,9 @@ class Builtins {
 
     static Object call(String functionName, Object[] posParams) {
         switch (functionName) {
+            case "input":
+                Scanner scanner = new Scanner(System.in);
+                return scanner.nextLine();
             case "print":
                 System.out.println(posParams[0]);
                 return null;

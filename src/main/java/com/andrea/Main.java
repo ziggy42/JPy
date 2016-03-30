@@ -12,12 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
         String filePath;
-        if (args.length == 0)
-            try (Scanner scanner = new Scanner(System.in)) {
-                System.out.print("File Path: ");
-                filePath = scanner.nextLine();
-            }
-        else filePath = args[0];
+        if (args.length == 0) {
+            System.out.print("File Path: ");
+            Scanner scanner = new Scanner(System.in);
+            filePath = scanner.nextLine();
+        } else filePath = args[0];
 
         PyCodeObject pyCodeObject;
         VirtualMachine vm = new VirtualMachine();
