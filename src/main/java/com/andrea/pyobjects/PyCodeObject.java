@@ -1,6 +1,7 @@
 package com.andrea.pyobjects;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -148,7 +149,7 @@ public class PyCodeObject {
         return stringBuilder.toString();
     }
 
-    public static PyCodeObject buildPyCodeObject(BufferedReader in) throws Exception {
+    public static PyCodeObject buildPyCodeObject(BufferedReader in) throws IOException {
         int co_argcount = Integer.parseInt(in.readLine());
         int co_nlocals = Integer.parseInt(in.readLine());
         int co_stacksize = Integer.parseInt(in.readLine());

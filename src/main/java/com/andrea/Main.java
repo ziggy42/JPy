@@ -5,26 +5,29 @@ import com.andrea.vm.VirtualMachine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String filePath;
-        if (args.length == 0) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("File Path: ");
-            filePath = in.readLine();
-            in.close();
-        } else {
-            filePath = args[0];
-        }
+        if (args.length == 0)
+            try (Scanner scanner = new Scanner(System.in)) {
+                System.out.print("File Path: ");
+                filePath = scanner.nextLine();
+            }
+        else filePath = args[0];
 
-        BufferedReader in = new BufferedReader(new FileReader(filePath));
-        PyCodeObject pyCodeObject = PyCodeObject.buildPyCodeObject(in);
-        in.close();
-
+        PyCodeObject pyCodeObject;
         VirtualMachine vm = new VirtualMachine();
-        vm.runCode(pyCodeObject);
+        try (BufferedReader in = new BufferedReader(new FileReader(filePath))) {
+            pyCodeObject = PyCodeObject.buildPyCodeObject(in);
+            vm.runCode(pyCodeObject);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error executing file: " + e.getMessage());
+        }
     }
 }
